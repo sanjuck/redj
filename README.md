@@ -1,4 +1,3 @@
-# redj
-ReDJ Framework With JAVA
+# ReDJ Framework With JAVA
 
 
