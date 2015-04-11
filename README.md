@@ -2,7 +2,7 @@
 
 ### Features
 
-* [[ORM Framework ]]
+* [ORM Framework]
 
 ### 다른 프레임웤과의 통합 
 
