@@ -1,0 +1,1 @@
+var com_redj_test_web_AjopJSON2Java=AJC.extend({init:function() { this._super(); },testSave:function(){return this.afterReturning(this.before(arguments).action("href", "/AjopJSON2Java/testSave", arguments));},save:function(){return this.afterReturning(this.before(arguments).action("call", "/AjopJSON2Java/save", arguments));}});

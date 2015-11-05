@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://redj.epan.kr/xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://redj.epan.kr/xsd http://redj.epan.kr/xsd/configuration.xsd">
+
+	<cacheLifetime>10000</cacheLifetime>
+	<charsetEncoding>UTF-8</charsetEncoding>
+
+	<logger class="com.redjframework.log.ConsoleLogger">
+		<property name="debug">yes</property>
+		<property name="info">yes</property>
+		<property name="error">yes</property>
+		<property name="fatal">yes</property>
+		<property name="warn">yes</property>
+	</logger>
+
+	<logger class="com.redjframework.log.ConsoleLogger" name="bean">
+		<property name="debug">yes</property>
+		<property name="info">yes</property>
+		<property name="error">yes</property>
+		<property name="fatal">yes</property>
+		<property name="warn">yes</property>
+	</logger>
+
+	<assign class="com.redjframework.db.CRUDFactory" target="com.redjframeworksample.test.service.vo.*">
+		<args>
+			<item>${derby}</item>
+		</args>
+	</assign>
+
+	<aspect order="0"
+		class="com.redjframeworksample.test.service.aop.DerbyTableCheck"
+		pointcut="com.redjframeworksample.test.service.*" />
+
+	<bean id="jdbc" resource="config.dev.properties" />
+
+	<bean id="derby" class="com.redjframework.db.resource.JDBCDatabaseResource">
+		<args>
+			<item>${jdbc['jdbc.driver']}</item>
+			<item>${jdbc['jdbc.url']}</item>
+			<item>${jdbc['jdbc.user']}</item>
+			<item>${jdbc['jdbc.passwd']}</item>
+		</args>
+	</bean>
+
+	<bean id="com.redjframework.db.QueryBeanManager" class="com.redjframework.db.QueryBeanManager">
+		<args>
+			<item>${derby}</item>
+		</args>
+	</bean>
+
+
+</configuration>

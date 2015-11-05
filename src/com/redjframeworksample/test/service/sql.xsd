@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://redj.epan.kr/xsd" elementFormDefault="qualified"
+    xmlns="http://www.w3.org/2001/XMLSchema" xmlns:queryList="http://redj.epan.kr/xsd">
+
+    <element name="query-list">
+        <complexType>
+            <choice minOccurs="0" maxOccurs="unbounded">
+                <element name="query" type="queryList:QueryType"/>
+                <element name="cache" type="queryList:CacheType"/>
+            </choice>
+        </complexType>
+    </element>
+
+    <complexType name="QueryType" mixed="true">
+        <choice minOccurs="0" maxOccurs="unbounded">
+            <element name="case" type="queryList:CaseType"/>
+            <element name="loop" type="queryList:LoopType"/>
+            <element name="include" type="queryList:IncludeType"/>
+            <element name="dynamic" type="queryList:DynamicType"/>
+            <element name="group" type="queryList:GroupType"/>
+        </choice>
+        <attribute name="id" type="ID" use="required"/>
+        <attribute name="beanType" type="string" />
+        <attribute name="cache" type="string" />
+        <attribute name="dependentCaches" type="string" />
+    </complexType>
+
+    <complexType name="CacheType" >
+        <attribute name="id" type="string" use="required" />
+        <attribute name="timeout" type="long" use="required" />
+        <attribute name="maxCount" type="long" use="required" />
+    </complexType>
+
+    <complexType name="CaseType" mixed="true">
+        <choice minOccurs="0" maxOccurs="unbounded">
+            <element name="case" type="queryList:CaseType" />
+            <element name="loop" type="queryList:LoopType"/>
+            <element name="include" type="queryList:IncludeType" />
+            <element name="dynamic" type="queryList:DynamicType"/>
+        </choice>
+        <attribute name="when" type="string"/>
+        <attribute name="property" type="string"/>
+        <attribute name="state" default="notEmpty">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="notEmpty"/>
+                    <enumeration value="notNull"/>
+                    <enumeration value="empty"/>
+                    <enumeration value="null"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+        <attribute name="eq"/>
+        <attribute name="ne"/>
+        <attribute name="lt"/>
+        <attribute name="le"/>
+        <attribute name="ge"/>
+        <attribute name="gt"/>
+        <attribute name="in"/>
+        <attribute name="notIn"/>
+    </complexType>
+
+    <complexType name="LoopType" mixed="true">
+        <choice minOccurs="0" maxOccurs="unbounded">
+            <element name="case" type="queryList:CaseType" />
+            <element name="loop" type="queryList:LoopType"/>
+            <element name="include" type="queryList:IncludeType" />
+            <element name="dynamic" type="queryList:DynamicType"/>
+        </choice>
+        <attribute name="var" use="required" type="string"/>
+        <attribute name="property" use="required" type="string"/>
+    </complexType>
+
+    <complexType name="IncludeType">
+        <attribute name="ref" type="IDREF" use="required"/>
+    </complexType>
+
+    <complexType name="DynamicType">
+    	<attribute name="var" default="property" type="string"/>
+    	<attribute name="property" type="string"/>
+    </complexType>
+
+    <complexType name="GroupType">
+    	<attribute name="property" type="string" use="required" />
+    	<attribute name="columns" type="string" use="required" />
+    </complexType>
+</schema>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://redj.epan.kr/xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://redj.epan.kr/xsd http://redj.epan.kr/xsd/configuration.xsd">
+
+	<assign class="com.redjframeworksample.test.web.springframework.SpringApplicationContext" target="com.springframework.test.service.**.*" />
+
+	<aspect order="0" class="com.redjframeworksample.test.service.aop.DerbyTableCheck" target="com.redjframeworksample.test.web.springframework.*" />
+
+</configuration>

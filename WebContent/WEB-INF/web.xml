@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<display-name>RedJ Sample</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 어플리케이션 필터 -->
+	<filter>
+		<filter-name>Application Filter</filter-name>
+		<filter-class>com.redjframework.xos.ApplicationFilter</filter-class>
+		<init-param>
+			<param-name>include</param-name>
+			<param-value>com.redjframeworksample.test.web</param-value>
+		</init-param>
+		<init-param>
+			<param-name>factory</param-name>
+			<param-value>com.redjframework.xos.sample.SessionControllerFactory</param-value>
+		</init-param>
+		<!-- <init-param> <param-name>container</param-name> <param-value>com.redjframework.xos.sample.URLPathApplicationContainer?extension=do</param-value>
+			</init-param> -->
+		<init-param>
+			<param-name>container</param-name>
+			<param-value>com.redjframework.xos.sample.URLPathApplicationContainer</param-value>
+		</init-param>
+		<init-param>
+			<param-name>configPath</param-name>
+			<param-value>
+				classpath:redj${System.getProperty('mode') != null ? '-' + System.getProperty('mode') : ''}.properties,
+				classpath:redj-spring.properties
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>/**/*.png, /**/*.ico, /**/*.gif</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>Application Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+</web-app>

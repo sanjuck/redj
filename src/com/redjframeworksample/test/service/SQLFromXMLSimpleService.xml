@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query-list xmlns="http://redj.epan.kr/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://redj.epan.kr/xsd sql.xsd ">
+	<query id="findMsgByID">
+	select name from demo where id = ?
+	</query>
+
+	<query id="findMsg">
+	select name from demo where id = :id
+		<case when="id > 1"> and 1=1</case>
+	</query>
+</query-list>
